@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="account_tax_return.report_financial_marocain">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.internal_layout">
+                <div class="page">
+                    <h2 t-esc="data['form']['account_report_id'][1]"/>
+
+                    <div class="row mt32 mb32">
+                        <div class="col-xs-3">
+                            <strong>Plan comptable:</strong>
+                            <p t-esc="get_account(data)"/>
+                        </div>
+                        <div class="col-xs-3">
+                            <strong>Exercice:</strong>
+                            <p t-esc="get_fiscalyear(data)"/>
+                        </div>
+                        <div class="col-xs-3">
+                            <strong>Filtré par:</strong>
+                            <p>
+                                <span t-if="data['form']['filter'] == 'filter_no'">Non filtré</span>
+                                <span t-if="data['form']['filter'] == 'filter_period'">Filtré par période</span>
+                                <span t-if="data['form']['filter'] == 'filter_date'">Filtré par date</span>
+                                <p t-if="data['form']['filter'] == 'filter_period'">
+                                    Debut Period: <span t-esc="get_start_period(data)"/>
+                                    Fin Period: <span t-esc="get_end_period(data)"/>
+                                </p>
+                                <p t-if="data['form']['filter'] == 'filter_date'">
+                                    Date de : <span t-esc="formatLang(get_start_date(data), date=True)"/><br />
+                                    Date à : <span t-esc="formatLang(get_end_date(data), date=True)"/>
+                                </p>
+                            </p>
+                        </div>
+                        <div class="col-xs-3">
+                            <strong>Target Moves:</strong>
+                            <p t-esc="get_target_move(data)"/>
+                        </div>
+                    </div>
+
+
+                    <table class="table table-bordered" t-if="not data['form']['enable_filter'] and not data['form']['debit_credit']">
+                        <thead>
+                            <tr>
+                                <th>Actif</th>
+                                <th colspan="3">Exercice</th>
+				<th class="text-right">Exercice Prec</th>
+                            </tr>
+
+			    <tr>
+				<th></th>
+                                <th>Brut</th>
+                                <th>Amortissement et provisions</th>
+				<th>Net</th>
+				<th>Net</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+			   <tr t-foreach="get_lines(data)" t-as="a">
+                                
+
+                                    <td>
+                                        <span style="color: white;" t-esc="'..' * a.get('level', 0)"/>
+					<t t-set="style" t-value="'font-weight: bold;'"/>
+                                        <span t-att-style="style" t-esc="a.get('name')"/>
+						<td><span t-att-style="style" t-esc="a.get('balance')"/></td>
+						<td><span t-if="a.get('name') == 'IMMOBILISATIONS EN NON-VALEURS'" t-esc="a.get('amm_nv')"/>
+						<span t-if="a.get('name') == 'IMMOBILISATIONS INCORPORELLES'" t-esc="a.get('amm_imm_incorp')+a.get('prov_imm_incorp')"/>
+						<span t-if="a.get('name') == 'IMMOBILISATIONS CORPORELLES'" t-esc="a.get('amm_imm_corp')+a.get('prov_imm_corp')"/>
+						<span t-if="a.get('name') == 'IMMOBILISATIONS FINANCIERES 1'" t-esc="a.get('prov_imm_finan1')"/>
+						<span t-if="a.get('name') == 'IMMOBILISATIONS FINANCIERES 2'" t-esc="a.get('prov_imm_finan2')"/>
+						<span t-if="a.get('name') == 'STOCKS'" t-esc="a.get('prov_stock')"/>
+						<span t-if="a.get('name') == 'TITRES ET VALEURS DE PLACEMENT'" t-esc="a.get('prov_tvp')"/></td>
+
+						<td><span t-if="a.get('name') == 'IMMOBILISATIONS EN NON-VALEURS'" t-esc="a.get('balance')-a.get('amm_nv')"/>
+						<span t-if="a.get('name') == 'IMMOBILISATIONS INCORPORELLES'" t-esc="a.get('balance')-a.get('amm_imm_incorp')-a.get('prov_imm_incorp')"/>
+						<span t-if="a.get('name') == 'IMMOBILISATIONS CORPORELLES'" t-esc="a.get('balance')-a.get('amm_imm_corp')-a.get('prov_imm_corp')"/>
+						<span t-if="a.get('name') == 'IMMOBILISATIONS FINANCIERES 1'" t-esc="a.get('balance')-a.get('prov_imm_finan1')"/>
+						<span t-if="a.get('name') == 'IMMOBILISATIONS FINANCIERES 2'" t-esc="a.get('balance')-a.get('prov_imm_finan2')"/>
+						<span t-if="a.get('name') == 'STOCKS'" t-esc="a.get('balance')-a.get('prov_stock')"/>
+						<span t-if="a.get('name') == 'TITRES ET VALEURS DE PLACEMENT'" t-esc="a.get('balance')-a.get('prov_tvp')"/></td>
+						<td></td>
+					
+					<tr t-foreach="get_lines_child(data,a.get('name'))" t-as="c">
+						<t t-set="style" t-value="'font-weight: normal;'"/>
+						<td><span t-att-style="style" t-esc="c.get('name_child')"/>						</td>
+						<td><span t-att-style="style" t-esc="c.get('balance_child')"/></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+                                    </td>
+
+				
+                              
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                   
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>

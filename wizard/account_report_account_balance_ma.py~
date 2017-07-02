@@ -1,0 +1,106 @@
+# -*- coding: utf-8 -*-
+##############################################################################
+#
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+
+import time
+from openerp.osv import fields, osv
+from openerp.tools.translate import _
+#from openerp import models, fields, api
+from openerp.report import report_sxw
+
+
+
+
+class account_balance_report_ma(osv.osv_memory,object):
+
+    #_inherits = {
+	#'account.balance': 'account_balance',
+        #'account.balance.report': 'account_balance_report',
+		#}
+
+   
+    
+
+    _inherit = 'account.balance.report'
+    #_inherit = 'account.balance'
+    #_inherit = 'report.account.account.balance'
+    _name = 'account.balance.report.ma'
+    _description = 'Moroccan Trial Balance Report'
+    _columns = {
+    'etat_balance': fields.char('Etat de la balance', readonly=True),
+    'sequence': fields.integer('sequence', required=True),
+    #'account_balance':fields.many2one('account_balance.ma', ondelete='cascade'),
+    'account_balance_report':fields.many2one('account.balance.report', ondelete='cascade'),
+    #'anouveau_debit':fields.float('A nouveau debit',required=False),
+    #'anouveau_credit':fields.float('A nouveau credit',required=False),
+    #'sum_debit':fields.float('debit',required=False),
+    #'sum_credit':fields.float('credit',required=False),
+    #'lines': fields.function(lines,type="many2many",string="lines"), 
+    #'sum_debit': fields.function(_sum_debit,type="float",string="sum debit"), 
+    #'sum_credit': fields.function(_sum_credit,type="float",string="sum credit"), 
+    #'get_fiscalyear':fields.function(_get_fiscalyear,type="char",string="fiscalyear"), 
+    #'get_filter': fields.function(_get_filter,type="char",string="filter"), 
+    #'get_start_period': fields.function(_get_start_period,type="date",string="start period"), 
+    #'get_end_period':  fields.function(_get_end_period,type="date",string="end period"), 
+    #'get_account': fields.function(_get_account,type="char",string="accounts"), 
+    #'get_journal': fields.function(_get_journal,type="char",string="journals"), 
+    #'get_start_date':fields.function(_get_start_date,type="date",string="start date"), 
+    #'get_end_date':fields.function(_get_end_date,type="date",string="end date"), 
+    #'get_target_move': fields.function(_get_target_move,type="char",string="target move"),
+    
+		}
+
+    
+    
+    #def get_data(self,form,ids=None, done=None):
+	#obj=self.pool.get('account.balance.ma')
+	#return obj.lines(form, ids, done)
+	#return self.account_balance.lines(form, ids, done)
+	#return self.account_balance.lines(self, form, ids, done)
+
+    def get_account(self,cr,uid):
+	account_ids = self.pool.get('account.account').search(cr,uid,[])
+        account_details = self.pool.get('account.account').browse(cr, uid, account_ids)
+        return account_details
+
+    def pre_print_report1(self, cr, uid, ids, data, context=None):
+      
+        return data
+
+    def print_report1(self, cr, uid, ids, data, context=None):
+        data = self.pre_print_report1(cr, uid, ids, data, context=context)
+        return self.pool['report'].get_action(cr, uid, [], 'account_tax_return.report_trialbalance_ma', data=data, context=context)
+
+    def _print_report(self, cr, uid, ids, data, context=None):
+        data = self.pre_print_report(cr, uid, ids, data, context=context)
+        return self.pool['report'].get_action(cr, uid, [], 'account_tax_return.report_trialbalance_ma', data=data, context=context)
+	
+    def print_report(self, cr, uid, ids, data, context=None):
+		if context is None:
+		    context = {}
+		data = self.read(cr, uid, ids)[0]
+		#data=self.pool.get('account.test').read(cr,uid,ids)[0]
+		datas = {
+
+		         'form': data
+		        }
+
+		return { 'type': 'ir.actions.report.xml', 'report_name': 'test_report1', 'datas': datas}
+

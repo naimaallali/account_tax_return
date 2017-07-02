@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="account_tax_return.report_passage_result">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.internal_layout">
+                <div class="page">
+                    <div class="row mt32">
+                    <div class="col-xs-3">
+                        <strong>Plan comptable:</strong>
+                        <p t-esc="get_account(data)"/>
+                    </div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div>
+                    <div class="col-xs-3">
+                        <strong>Exercice:</strong>
+                        <p t-esc="get_fiscalyear(data)"/>
+                    </div><br/>
+	          <div class="row mt32">
+			<div class="col-xs-2"></div><div class="col-xs-2"></div><div class="col-xs-4"></div>
+			<div class="col-xs-3">
+			    <strong>Tableau n° 03 - B12</strong>
+		        </div><br/><br/>
+		    <div class="col-xs-2"></div><div class="col-xs-2"></div><div class="col-xs-4"></div>
+		    <div class="col-xs-4">
+                    <strong>PASSAGE DU RESULTAT NET COMPTABLE AU RESULTAT NET FISCAL</strong><br/></div>
+		    
+			</div>
+                    </div>
+
+			<br/>
+                    <table class="table table-bordered" t-if="not data['form']['enable_filter'] and not data['form']['debit_credit']">
+                        <thead>
+                         
+                                <th>INTITULE</th>
+                                <th class="text-right">MONTANT</th>
+				<th class="text-right">MONTANT</th>
+                            
+                        </thead>
+                        <tbody>
+
+			   <tr>
+                                    <td>
+					<t t-set="style" t-value="'font-weight: bold;'"/>
+                                        <span t-att-style="style"></span><p>I .INTITULE RESULTAT NET COMPTABLE</p>					<t t-set="style" t-value="'font-weight: normal;'"/>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;. BENEFICE NET</p>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;. PERTE NET</p>
+					<t t-set="style" t-value="'font-weight: bold;'"/>
+                                        <span t-att-style="style"></span><p>II . REINTEGRATION FISCALES</p>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;1 - Courantes</p>
+					<t t-set="style" t-value="'font-weight: normal;'"/>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;* Impôt sur le résultat</p>				<t t-set="style" t-value="'font-weight: bold;'"/>
+				        <br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;2 - Non Courantes</p>
+					<t t-set="style" t-value="'font-weight: normal;'"/>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;* 100 % les amendes pénalités et majorations</p>		
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;* Location véhicules</p>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;* Voyage et déplacement</p>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;* Interet non déductible</p>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;* congé payé</p>
+					</td>
+					<td></td><td></td>
+					</tr>
+					<tr>
+					<td>
+					<t t-set="style" t-value="'font-weight: bold;'"/>
+                                        <br/><span t-att-style="style"></span><p>IV . RESULTAT BRUT FISCAL</p>					<t t-set="style" t-value="'font-weight: normal;'"/>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;. BENEFICE BRUT FISCAL (A)</p>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;. PERTE
+BRUT FISCAL (B)"</p>
+					<t t-set="style" t-value="'font-weight: bold;'"/>
+                                        <br/><span t-att-style="style"></span><p>V . REPORTS DEFICITAIRES IMPUTES (C)</p>					<t t-set="style" t-value="'font-weight: normal;'"/>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;. Exercice n - 4</p>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;. Exercice n - 3</p>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;. Exercice n - 2</p>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;. Exercice n - 1</p>
+
+					<t t-set="style" t-value="'font-weight: bold;'"/>
+                                        <br/><span t-att-style="style"></span><p>VI . RESULTAT NET FISCAL</p>					<t t-set="style" t-value="'font-weight: normal;'"/>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;. BENEFICE NET FISCAL (A-C)</p>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;ou </p>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;. DEFICIT NET FISCAL (B)</p>
+					<t t-set="style" t-value="'font-weight: bold;'"/>
+                                        <br/><span t-att-style="style"></span><p>VII . CUMUL DES AMORTISSEMENTS FISCALEMENT DIFFERES</p>					<t t-set="style" t-value="'font-weight: normal;'"/>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;. Exercice n - 3</p>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;. Exercice n - 2</p>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;. Exercice n - 1</p>
+					
+					<t t-set="style" t-value="'font-weight: bold;'"/>
+                                        <br/><span t-att-style="style" ></span><p>VIII . CUMUL DES DEFICITS FISCAUX RESTANT A REPORTER</p>					<t t-set="style" t-value="'font-weight: normal;'"/>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;. Exercice n - 4</p>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;. Exercice n - 3</p>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;. Exercice n - 2</p>
+					<br/><span t-att-style="style"></span><p>&#160;&#160;&#160;&#160;&#160;. Exercice n - 1</p>
+					</td>
+					<td></td><td></td>
+					</tr>
+
+                        </tbody>
+                    </table>
+
+                   
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>

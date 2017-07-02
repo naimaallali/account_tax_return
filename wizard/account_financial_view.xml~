@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+
+<!--Heritage balance from Account-->
+
+	    <record id="view_account_financial_form3" model="ir.ui.view">
+            <field name="name">account.financial.inherit</field>
+            <field name="model">accounting.report.ma</field>
+            <field name="inherit_id" ref="account.account_common_report_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='target_move']" position="after">
+                    <field name="account_report_id" domain="[('parent_id','=',False)]" string="rapports de la liasse fiscale"/>
+                    <field name="enable_filter"/>
+                    <field name="debit_credit" attrs="{'invisible': [('enable_filter','=',True)]}"/>
+                </xpath>
+                <xpath expr="//notebook/page[@string='Filters']" position="after">
+                    <page string="Comparison" attrs="{'invisible': [('enable_filter','=',False)]}">
+                        <group>
+                            <field name="label_filter" attrs="{'required': [('enable_filter', '=', True)]}"/>
+                            <field name="fiscalyear_id_cmp"/><newline/>
+                            <field name="filter_cmp"/>
+                        </group>
+                        <group string="Dates" attrs="{'invisible':[('filter_cmp', '!=', 'filter_date')]}">
+                            <field name="date_from_cmp" attrs="{'required':[('filter_cmp', '=', 'filter_date')]}"/>
+                            <field name="date_to_cmp" attrs="{'required':[('filter_cmp', '=', 'filter_date')]}"/>
+                        </group>
+                        <group string="Periods" attrs="{'invisible':[('filter_cmp', '!=', 'filter_period')]}">
+                            <field name="period_from_cmp" domain="[('fiscalyear_id', '=', fiscalyear_id_cmp)]" attrs="{'required':[('filter_cmp', '=', 'filter_period')]}"/>
+                            <field name="period_to_cmp" domain="[('fiscalyear_id', '=', fiscalyear_id_cmp)]" attrs="{'required':[('filter_cmp', '=', 'filter_period')]}"/>
+                        </group>
+                   </page>
+                </xpath>
+                <xpath expr="//notebook/page[@string='Journals']" position="replace">
+                </xpath>
+            
+		<data>
+		<group>
+	<button string="imprimer rapport" type="object" name="print_report1" icon="gtk-print" />
+		</group>
+	      </data>
+</field>
+        </record>
+
+
+	<!--account tax return view-->
+
+	   
+        <record id="action_account_financial_menu_ma" model="ir.actions.act_window">
+            <field name="name">Bilan marocain</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">accounting.report.ma</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_account_financial_form3"/>
+            <field name="target">new</field>
+        </record>
+
+
+	<record id="action_account_tax_return_menu_ma" model="ir.actions.act_window">
+            <field name="name">Liasse fiscale marocaine</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">accounting.report.ma</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_account_financial_form3"/>
+            <field name="target">new</field>
+        </record>
+
+
+	<record id="action_account_bilan_actif_menu_ma" model="ir.actions.act_window">
+            <field name="name">Bilan actif</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">accounting.report.ma</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_account_financial_form3"/>
+            <field name="target">new</field>
+        </record>
+
+
+	<menuitem action="action_account_financial_menu_ma" id="menu_action_account_financial_ma" parent="menu_action_account_tax_return_parent" name="Bilan"/>
+
+	<menuitem action="action_account_tax_return_menu_ma" id="menu_action_account_tax_return" parent="menu_action_account_tax_return_parent" name="Liasse fiscale"/>
+
+	<menuitem action="action_account_bilan_actif_menu_ma" id="menu_action_account_bilan_actif" parent="menu_action_account_tax_return" name="Bilan(Actif)"/>
+
+
+	</data>
+</openerp>

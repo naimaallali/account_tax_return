@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+
+<!--Heritage balance from Account-->
+		<record model="ir.ui.view" id="view_account_fiscalyear_form3">
+			<field name="name">account.fiscalyear.inherit</field>
+			<field name="model">account.balance.report.ma</field>
+			<field name="inherit_id" ref="account.account_common_report_view" />
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				
+				 <data>
+	 <xpath expr="//notebook/page[@string='Journals']" position="replace">
+            </xpath>
+	 <xpath expr="//field[@name='target_move']" position="before">
+		<field name="display_account"/>
+		<field name="etat_balance"/>
+		<field name="sequence"/>
+                <newline/>
+		</xpath>
+
+<!--<button  type="object" string="verifier lequilibre de la balance" class="oe_highlight" /> -->
+				</data>
+	<group>
+	<!--<button string="imprimer rapport" type="object" name="print_report1" icon="gtk-print" />-->
+	</group>
+			</field>
+		</record>
+
+
+        <record id="action_account_balance_menu_ma" model="ir.actions.act_window">
+            <field name="name">Balance marocaine</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.balance.report.ma</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_account_fiscalyear_form3"/>
+            <field name="target">new</field>
+        </record>
+
+
+
+
+<!-- <record id="action_account_accounting_data" model="ir.actions.act_window">
+            <field name="name">Accounting data</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.balance.report.ma</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>-->
+
+<menuitem id="menu_action_account_tax_return_parent" parent="account.menu_finance" name="Déclaration fiscale"/>
+
+	<menuitem action="action_account_balance_menu_ma" id="menu_action_account_accounting_data" parent="menu_action_account_tax_return_parent" name="Données comptables"/>
+
+
+
+
+	
+	<record id="action_account_property_data" model="ir.actions.act_window">
+		    <field name="name">Accounting property</field>
+		    <field name="res_model">account.balance.report.ma</field>
+		    <field name="view_type">form</field>
+		    <field name="view_mode">tree,form</field>
+		</record>
+
+	    <record id="action_account_tax_return" model="ir.actions.act_window">
+		    <field name="name">Account Tax return</field>
+		    <field name="res_model">account.balance.report.ma</field>
+		    <field name="view_type">form</field>
+		    <field name="view_mode">tree,form</field>
+		</record>
+
+	<record id="action_account_declaration_annex" model="ir.actions.act_window">
+		    <field name="name">Account declaration annex</field>
+		    <field name="res_model">account.balance.report.ma</field>
+		    <field name="view_type">form</field>
+		    <field name="view_mode">tree,form</field>
+		</record>
+
+	</data>
+</openerp>

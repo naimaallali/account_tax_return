@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="account_tax_return.report_tva">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.internal_layout">
+                <div class="page">
+                    <div class="row mt32">
+                    <div class="col-xs-3">
+                        <strong>Plan comptable:</strong>
+                        <p t-esc="get_account(data)"/>
+                    </div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div>
+                    <div class="col-xs-3">
+                        <strong>Exercice:</strong>
+                        <p t-esc="get_fiscalyear(data)"/>
+                    </div><br/>
+	          <div class="row mt32">
+			<div class="col-xs-2"></div><div class="col-xs-2"></div><div class="col-xs-4"></div>
+			<div class="col-xs-3">
+			    <strong>Tableau n° 12 - B14</strong>
+		        </div><br/><br/>
+		    <div class="col-xs-2"></div><div class="col-xs-2"></div>
+		    <div class="col-xs-4">
+                    <strong>DETAIL DE LA TAXE SUR VALEUR AJOUTEE</strong><br/></div>
+		    
+			</div>
+                    </div>
+		<br/><br/>
+
+                    <table class="table table-bordered" t-if="not data['form']['enable_filter'] and not data['form']['debit_credit']">
+                        <thead>
+                               <th class="text-right">NATURE</th>
+				<th class="text-right">SOLDE DEBUT
+EXERCICE(1)</th>
+				<th class="text-right">Opération de
+l'exercice(2)</th>
+				<th class="text-right">Déclaration TVA de
+l'exercice(3)</th>
+				<th class="text-right">SOLDE FIN
+EXERCICE(1+2-3)</th>
+				
+                        </thead>
+                        <tbody>
+
+			   		<tr>
+						
+						<td><br/><br/><br/><p>A. T.V.A FACTUREE</p></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						
+					</tr>
+					<tr>
+						<td><br/><br/><br/><p>B. T.V.A RECUPERABLE</p></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						
+					</tr>
+					<tr>
+						<td><br/><br/><br/><p>C. T.V.A DUE OU CREDIT DE TVA ( A - B )</p></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						
+					</tr>
+					
+                        </tbody>
+                    </table>
+		<br/><br/>
+		
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>

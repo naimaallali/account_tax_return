@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="account_tax_return.report_pmv_immobilisation">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.internal_layout">
+                <div class="page">
+                    <div class="row mt32">
+                    <div class="col-xs-3">
+                        <strong>Plan comptable:</strong>
+                        <p t-esc="get_account(data)"/>
+                    </div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div>
+                    <div class="col-xs-3">
+                        <strong>Exercice:</strong>
+                        <p t-esc="get_fiscalyear(data)"/>
+                    </div><br/>
+	          <div class="row mt32">
+			<div class="col-xs-2"></div><div class="col-xs-2"></div><div class="col-xs-4"></div>
+			<div class="col-xs-3">
+			    <strong>Tableau n° 10 - B3</strong>
+		        </div><br/><br/>
+		    <div class="col-xs-2"></div><div class="col-xs-2"></div>
+		    <div class="col-xs-4">
+                    <strong>TABLEAU DES PLUS OU MOINS VALUES SUR CESSIONS OU RETRAITS
+D'IMMOBILISATIONS</strong><br/></div>
+		    
+			</div>
+                    </div>
+		<br/><br/>
+
+                    <table class="table table-bordered" t-if="not data['form']['enable_filter'] and not data['form']['debit_credit']">
+                        <thead>
+                               <th class="text-right">Date de cession ou
+de retrait</th>
+				<th class="text-right">Compte principal</th>
+				<th class="text-right">Montant brut</th>
+				<th class="text-right">Amortissements
+cumulés</th>
+				<th class="text-right">Valeur nette
+d'amortissements</th>
+				<th class="text-right">Produit de cession</th>
+				<th class="text-right">Plus Values</th>
+				<th class="text-right">Moins values</th>
+				
+                        </thead>
+                        <tbody>
+
+			   		<tr>
+						<td>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td>
+						<td>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td>
+						<td>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td>
+						<td>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td>
+						<td>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td>
+						<td>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td>
+						<td>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td>
+						<td>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td><br/><br/><br/><br/><br/><br/></td>
+						<td><br/><br/><br/><br/><br/><br/></td>
+						<td><br/><br/><br/><br/><br/><br/></td>
+						<td><br/><br/><br/><br/><br/><br/></td>
+						<td><br/><br/><br/><br/><br/><br/></td>
+						<td><br/><br/><br/><br/><br/><br/></td>
+						<td><br/><br/><br/><br/><br/><br/></td>
+						<td><br/><br/><br/><br/><br/><br/></td>
+					</tr>
+					<tr>
+						<td colspan="2">TOTAL</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					
+					</tr>
+										
+			
+                        </tbody>
+                    </table>
+
+                   
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>

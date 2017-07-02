@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="account_tax_return.report_trialbalance_ma">
+    <t t-call="report.html_container">
+        <t t-call="report.internal_layout">
+            <div class="page">
+                
+                <div class="row mt32">
+                    <div class="col-xs-3">
+                        <strong>Plan comptable:</strong>
+                        <p t-esc="get_account(data)"/>
+                    </div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div>
+                    <div class="col-xs-3">
+                        <strong>Exercice:</strong>
+                        <p t-esc="get_fiscalyear(data)"/>
+                    </div><br/>
+	          <div class="row mt32">
+			<div class="col-xs-2"></div><div class="col-xs-2"></div><div class="col-xs-1"></div>
+		    <div class="col-xs-3">
+                    <strong>Balance des comptes</strong><br/>
+		    <strong>(Modèle Simplifié)</strong>
+                    </div>
+			</div>
+                </div>
+             
+		<br/>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Numéro de compte</th>
+                            <th>Intitulé des comptes</th>
+                            <th class="text-right" colspan="2">Mouvements au 31/05/2015</th>
+                            <th class="text-right" colspan="2">Mouvements</th>
+                            <th class="text-right" colspan="2">Soldes cumulés</th>
+			    
+                        </tr>
+			<tr>
+			    <th></th>
+			    <th></th>
+                            <th>Débit</th>
+                            <th>Crédit</th>
+			    <th>Débit</th>
+                            <th>Crédit</th>
+                            <th>Débit</th>
+                            <th>Crédit</th>
+			    
+                        </tr>
+                    </thead>
+                     <tbody>
+                        <tr t-foreach="get_lines(data)" t-as="child">
+                           
+                                <t t-set="style" t-value="'font-weight:bold;'"/>
+                            
+       
+                            <td>
+                                <span t-att-style="style" t-esc="child.get('code')"/>                                     
+                            </td>
+                            <td>
+                                
+                                <span t-att-style="style" t-esc="child.get('name')"/>
+                            </td>
+                            <td class="text-right">
+                                 <span t-att-style="style" t-esc="child.get('debit')"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-att-style="style" t-esc="child.get('credit')"/>
+                            </td>
+			    <td class="text-right">
+                                 <span t-att-style="style" t-esc="child.get('debit')"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-att-style="style" t-esc="child.get('credit')"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-att-style="style" t-esc="child.get('balance')"/>
+                            </td>
+                       	    <td class="text-right">
+                                <span t-att-style="style" t-esc="child.get('balance')"/>
+                            </td>
+			
+			<tr t-foreach="get_lines_child(data,child.get('name'))" t-as="children">
+				<t t-set="style" t-value="'font-weight:bold;'"/>
+                            
+       
+                            <td>
+                                <span t-att-style="style" t-esc="children.get('code')"/>                                     
+                            </td>
+                            <td>
+                                
+                                <span t-att-style="style" t-esc="children.get('name')"/>
+                            </td>
+                            <td class="text-right">
+                                 <span t-att-style="style" t-esc="children.get('debit')"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-att-style="style" t-esc="children.get('credit')"/>
+                            </td>
+			    <td class="text-right">
+                                 <span t-att-style="style" t-esc="children.get('debit')"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-att-style="style" t-esc="children.get('credit')"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-att-style="style" t-esc="children.get('balance')"/>
+                            </td>
+                       	    <td class="text-right">
+                                <span t-att-style="style" t-esc="0.0"/>
+                            </td>
+			</tr>
+                            
+</tr>
+			  
+		    
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>

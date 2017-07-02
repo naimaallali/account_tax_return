@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="account_tax_return.report_repartition_capital">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.internal_layout">
+                <div class="page">
+                    <div class="row mt32">
+                    <div class="col-xs-3">
+                        <strong>Plan comptable:</strong>
+                        <p t-esc="get_account(data)"/>
+                    </div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div>
+                    <div class="col-xs-3">
+                        <strong>Exercice:</strong>
+                        <p t-esc="get_fiscalyear(data)"/>
+                    </div><br/>
+	          <div class="row mt32">
+			<div class="col-xs-2"></div><div class="col-xs-2"></div><div class="col-xs-4"></div>
+			<div class="col-xs-3">
+			    <strong>Tableau n° 13 - C1</strong>
+		        </div><br/><br/>
+		    <div class="col-xs-2"></div><div class="col-xs-2"></div>
+		    <div class="col-xs-4">
+                    <strong>ETAT DE REPARTITION DU CAPITAL</strong><br/></div>
+		    
+			</div>
+                    </div>
+		<br/><br/>
+
+                    <table class="table table-bordered" t-if="not data['form']['enable_filter'] and not data['form']['debit_credit']">
+                        <thead>
+				<tr>
+                               <th class="text-right" rowspan="2">Nom - prénom ou raison sociale
+des principaux associés (1)</th>
+				<th class="text-right" rowspan="2">Adresse (2)</th>
+				<th class="text-right" colspan="2">NOMBRE DE TITRES</th>
+				<th class="text-right" rowspan="2">Valeur nominale de chaque action ou part sociale (5)</th>
+				<th class="text-right" colspan="3">MONTANT DU CAPITAL</th>
+				</tr>
+				<tr>
+				  <th class="text-right">Ex Preced (3)</th>
+				  <th class="text-right">Ex actuel (4)</th>
+				  <th class="text-right">Souscrit (6)</th>
+				  <th class="text-right">Appelé (7)</th>
+				  <th class="text-right">Libéré (8)</th>
+				</tr>
+				
+                        </thead>
+                        <tbody>
+
+			   		<tr>
+						
+						<td><br/><br/><br/><br/><br/><br/></td>
+						<td><br/><br/><br/><br/><br/><br/></td>
+						<td><br/><br/><br/><br/><br/><br/></td>
+						<td><br/><br/><br/><br/><br/><br/></td>
+						<td><br/><br/><br/><br/><br/><br/></td>
+						<td><br/><br/><br/><br/><br/><br/></td>
+						<td><br/><br/><br/><br/><br/><br/></td>
+						<td><br/><br/><br/><br/><br/><br/></td>
+						
+					</tr>
+					<tr>
+						<td colspan="2"><br/><br/><br/><p>TOTAL</p></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						<td><br/><br/><br/></td>
+						
+					</tr>
+					
+					
+                        </tbody>
+                    </table>
+		<br/><br/>
+		
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>

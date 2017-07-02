@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+<!--
+	<menuitem id="menu_action_account_tax_return_parent" parent="account.menu_finance" name="Déclaration fiscale"/>
+
+	<menuitem action="action_account_accounting_data" id="menu_action_account_accounting_data" parent="menu_action_account_tax_return_parent" name="Données comptables"/>
+
+	<menuitem action="action_account_tax_return" id="menu_action_account_tax_return" parent="menu_action_account_tax_return_parent" name="Liasse fiscale"/>
+
+	<menuitem action="action_account_declaration_annex" id="menu_action_account_declaration_annex" parent="menu_action_account_tax_return_parent" name="Déclarations annexes"/>-->
+
+	</data>
+</openerp>

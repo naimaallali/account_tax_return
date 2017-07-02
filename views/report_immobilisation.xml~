@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="account_tax_return.report_immobilisation">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.internal_layout">
+                <div class="page">
+                    <div class="row mt32">
+                    <div class="col-xs-3">
+                        <strong>Plan comptable:</strong>
+                        <p t-esc="get_account(data)"/>
+                    </div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div><div class="col-xs-3"></div>
+                    <div class="col-xs-3">
+                        <strong>Exercice:</strong>
+                        <p t-esc="get_fiscalyear(data)"/>
+                    </div><br/>
+	          <div class="row mt32">
+			<div class="col-xs-2"></div><div class="col-xs-2"></div><div class="col-xs-4"></div>
+			<div class="col-xs-3">
+			    <strong>Tableau n° 04 - B2</strong>
+		        </div><br/><br/>
+		    <div class="col-xs-2"></div><div class="col-xs-2"></div>
+		    <div class="col-xs-4">
+                    <strong>TABLEAU DES IMMOBILISATIONS AUTRES QUE FINANCIERES</strong><br/></div>
+		    
+			</div>
+                    </div>
+		<br/><br/>
+
+                    <table class="table table-bordered" t-if="not data['form']['enable_filter'] and not data['form']['debit_credit']">
+                        <thead>
+                         	<tr>
+                                <th rowspan="2">NATURE</th>
+                                <th class="text-right" rowspan="2">MONTANT BRUT DEBUT EXERCICE</th>
+				<th class="text-right" colspan="3">AUGMENTATION</th>
+				<th class="text-right" colspan="3">DIMINUTION</th>
+				<th class="text-right" rowspan="2">MONTANT BRUT FIN EXERCICE</th>
+				</tr>
+
+				<tr>
+				<th class="text-right">Acquisition</th>
+				<th>Production par l'entreprise
+pour elle même</th>
+				<th class="text-right">Virement</th>
+				<th class="text-right">Cession</th>
+				<th class="text-right">Retrait</th>
+				<th class="text-right">Virement</th>
+				</tr>
+                            
+                        </thead>
+                        <tbody>
+
+			   <tr t-foreach="get_lines_immobilisation(data)" t-as="a">
+                                    <td>
+                                        <span style="color: white;" t-esc="'..' * a.get('level', 0)"/>
+					<t t-set="style" t-value="'font-weight: bold;'"/>
+                                        <span t-att-style="style" t-esc="a.get('name')"/>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>					
+					<tr t-foreach="get_lines_child(data,a.get('name'))" t-as="c">
+						<t t-set="style" t-value="'font-weight: normal;'"/>
+						<td><p>*</p><span t-att-style="style" t-esc="c.get('name_child')"/>						</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+			
+					</tr>
+                                    </td>
+				
+
+				
+                              
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                   
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>
